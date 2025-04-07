@@ -3,8 +3,10 @@ using System.Reflection;
 using ReflectionLibrary;
 class Program
 {
-    static string PhoneClassName = "ReflectionLibrary.Phone";
-    static string ManufacturerClassName = "ReflectionLibrary.Manufacturer";
+    private const string MethodName = "Create";
+    private const string PhoneClassName = "ReflectionLibrary.Phone";
+    private const string ManufacturerClassName = "ReflectionLibrary.Manufacturer";
+    
 
     static void Main()
     {
@@ -23,12 +25,12 @@ class Program
                 throw new Exception("Classes are not found in assembly!");
             }
 
-            MethodInfo createPhoneMethod = phoneType.GetMethod("Create")!;
+            MethodInfo createPhoneMethod = phoneType.GetMethod(MethodName)!;
             object phoneTypeEnum = Enum.Parse(typeof(PhoneTypeEnum), "BudgetPhone");
             object[] parameters = { 1, "Nokia 3310", "123456789", phoneTypeEnum };
             object phoneInstance = createPhoneMethod.Invoke(null, parameters);
 
-            MethodInfo createManufacturerMethod = manufacturerType.GetMethod("Create")!;
+            MethodInfo createManufacturerMethod = manufacturerType.GetMethod(MethodName)!;
             object[] manufacturerParams = { "Nokia", "Helsinki, Finland", false };
             object manufacturerInstance = createManufacturerMethod.Invoke(null, manufacturerParams);
 
