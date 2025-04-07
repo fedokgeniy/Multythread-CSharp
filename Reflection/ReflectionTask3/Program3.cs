@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using ReflectionLibrary;
 
 try
 {
@@ -14,7 +15,8 @@ try
     }
 
     MethodInfo createPhoneMethod = phoneType.GetMethod("Create")!;
-    object[] parameters = { 1, "Nokia 3310", "123456789", "mobile" };
+    object phoneTypeEnum = Enum.Parse(typeof(PhoneType), "BudgetPhone");
+    object[] parameters = { 1, "Nokia 3310", "123456789", phoneTypeEnum };
     object phoneInstance = createPhoneMethod.Invoke(null, parameters);
 
     MethodInfo createManufacturerMethod = manufacturerType.GetMethod("Create")!;
